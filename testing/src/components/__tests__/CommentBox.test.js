@@ -28,18 +28,42 @@ it('has a text area and button', () => {
 
 });
 
-// test comment box functionality: find element, simulate a change event,
-// provide a fake event object, force component to update, expect textareas value to change
 
-it('has a textarea that users can type in', () => {
+// DESCRIBE FUNCTION: can be used to block it statements, if beforeEach doesnt apply to entire file
+describe('the text area', () => {
 
-    //simulate function requires the html name of an event ('change), not react's callbacks
-    //second argument in simulate gets passed to change handler function as the event parameter
-    //need keys like target to mirror normal event objects
-    wrapped.find('textarea').simulate('change', {
-        target: { value: 'new comment'}
+    beforeEach(() => {
+        //simulate function requires the html name of an event ('change), not react's callbacks
+        //second argument in simulate gets passed to change handler function as the event parameter
+        //need keys like target to mirror normal event objects
+
+        wrapped.find('textarea').simulate('change', {
+            target: { value: 'new comment'}
+        });
+
+        wrapped.update();
+
     });
-    wrapped.update();
-    expect(wrapped.find('textarea').prop('value')).toEqual('new comment');
 
-})
+    // test comment box functionality: find element, simulate a change event,
+    // provide a fake event object, force component to update, expect textareas value to change
+    it('has a textarea that users can type in', () => {
+        
+        expect(wrapped.find('textarea').prop('value')).toEqual('new comment');
+
+    });
+
+
+    it('when the form is submitted, text area is cleared', () => {
+
+
+        expect(wrapped.find('textarea').prop('value')).toEqual('new comment');
+
+        wrapped.find('form').simulate('submit');
+
+        wrapped.update();
+
+        expect(wrapped.find('textarea').prop('value')).toEqual('');
+
+    });
+});
