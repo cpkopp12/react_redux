@@ -1,5 +1,12 @@
+//IMPORTS -------------------------------------
 import React, { Component } from 'react';
+//redux imports --
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
+
+
+//CLASS COMPONENT ----------------------------
 class CommentBox extends Component {
 
     //initalize state object or handle textarea and change handler
@@ -14,7 +21,7 @@ class CommentBox extends Component {
 
         event.preventDefault();
 
-        // want to call action creator to save the comment
+        this.props.saveComment(this.state.comment);
 
         //empty textarea once comment is saved
         this.setState({ comment: '' });
@@ -38,4 +45,7 @@ class CommentBox extends Component {
     };
 };
 
-export default CommentBox;
+
+//EXPORT CLASS COMPONENT WITH REDUX CONNECT ------------------------
+//connect parameters: map state to props(null), action creators (imported * from actions)
+export default connect(null, actions)(CommentBox);

@@ -3,6 +3,7 @@ import React from 'react';
 // full dom requires clean up code in it blocks
 import { mount } from 'enzyme';
 
+import Root from '../../Root';
 import CommentBox from '../CommentBox';
 
 //GLOBALE VARS AND FUNCS ------------------------------------
@@ -10,7 +11,11 @@ import CommentBox from '../CommentBox';
 let wrapped;
 
 beforeEach(() => {
-    wrapped = mount(<CommentBox />);
+    wrapped = mount(
+        <Root>
+            <CommentBox />
+        </Root>
+    );
 });
 
 //clean up for full dom { mount } function
