@@ -1,6 +1,6 @@
 //IMPORTS -------------------------------------
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 //CLASS COMPONENT ---------------------------
 class CommentList extends Component {
@@ -16,6 +16,7 @@ class CommentList extends Component {
   render() {
     return (
       <div>
+        <h4>Comment List</h4>
         <ul>{this.renderComments()}</ul>
       </div>
     );
