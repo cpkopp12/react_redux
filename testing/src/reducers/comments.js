@@ -2,7 +2,7 @@
 import { SAVE_COMMENT, FETCH_COMMENTS } from '../actions/types';
 
 //EXPORT REDUCER -------------------------------
-export default function (state = [], action) {
+function commentsReducer(state = [], action) {
   switch (action.type) {
     case SAVE_COMMENT:
       //returns previous state array plus action.payload added as last index
@@ -14,3 +14,5 @@ export default function (state = [], action) {
       return state;
   }
 }
+
+export default commentsReducer;
