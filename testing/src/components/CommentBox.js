@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 //redux imports --
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import requireAuth from './requireAuth';
 
 //CLASS COMPONENT ----------------------------
 class CommentBox extends Component {
@@ -23,6 +24,7 @@ class CommentBox extends Component {
     this.setState({ comment: '' });
   };
 
+  // component render
   render() {
     return (
       <div>
@@ -46,5 +48,6 @@ class CommentBox extends Component {
 }
 
 //EXPORT CLASS COMPONENT WITH REDUX CONNECT ------------------------
-//connect parameters: map state to props(null), action creators (imported * from actions)
-export default connect(null, actions)(CommentBox);
+
+//connect parameters: map state to props, action creators (imported * from actions)
+export default connect(null, actions)(requireAuth(CommentBox));
