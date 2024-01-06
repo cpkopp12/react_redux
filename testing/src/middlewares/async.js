@@ -1,4 +1,4 @@
-const asyncMiddlewareFunction =
+const async =
   ({ dispatch }) =>
   (next) =>
   (action) => {
@@ -13,4 +13,4 @@ const asyncMiddlewareFunction =
     });
   };
 
-export default asyncMiddlewareFunction;
+export default async;
