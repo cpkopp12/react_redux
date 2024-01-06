@@ -8,11 +8,7 @@ import reducers from './reducers';
 
 //EXPORT FUNCTIONAL COMP-------------------
 export default ({ children, initialState = {} }) => {
-  const store = createStore(
-    reducers,
-    initialState,
-    applyMiddleware(reduxPromise)
-  );
+  const store = createStore(reducers, initialState, applyMiddleware());
   // this component is going to allow us to wrap any comps passed as props with the <Provider>
   return <Provider store={store}>{children}</Provider>;
 };
