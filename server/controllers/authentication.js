@@ -1,5 +1,15 @@
+// IMPORTS --------------------------------------
 const User = require('../models/user');
+const jwt = require('jwt-simple');
+const config = require('../config');
 
+// JWT setup --------------------------------------
+function tokenForUser(user) {
+  const timestamp = new Date().getTime();
+  return jwt.encode({ sub: user.id, iat: timestamp }, config.secret);
+}
+
+// CONTROLLER FUNCS ----------------------------------
 exports.signup = async function (req, res, next) {
   // check for existing user
   const email = req.body.email;
@@ -19,10 +29,14 @@ exports.signup = async function (req, res, next) {
       password: password,
     });
 
+    if (!email || !password) {
+      return res.status(422).send({ error: 'provide email and password' });
+    }
+
     // save and return success
     try {
       newUser.save();
-      res.json({ success: true });
+      res.json({ token: tokenForUser(newUser) });
     } catch (error) {
       return next(error);
     }
